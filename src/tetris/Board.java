@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * This class is used to create the tetris game board
- * and also to handle the currently fa tetromino
+ * and also to handle the currently fa tetromino   aa
  */
 public class Board {
     private SquareType[][] grid;
