@@ -23,101 +23,101 @@ public class Board {
     private TetrisGame game;
 
 
-
     private List<BoardListener> boardListeners = new ArrayList<>();
 
     public Board(int width, int height) {
-	this.width = width;
-	this.height = height;
-	this.grid = new SquareType[height][width];
-	this.game = new TetrisGame(this);
+        this.width = width;
+        this.height = height;
+        this.grid = new SquareType[height][width];
+        this.game = new TetrisGame(this);
 
-	// Fills the grid with SquareType.EMPTY
-	for (int column = 0; column < width; column++) {
-	    for (int row = 0; row < height; row++) {
-		if (column == 0 || column == width - 1 || row == 0 || row == height - 1) {
-		    grid[row][column] = SquareType.OUTSIDE;
-		} else {
-		    grid[row][column] = SquareType.EMPTY;
-		}
-	    }
-	}
+        // Fills the grid with SquareType.EMPTY
+        for (int column = 0; column < width; column++) {
+            for (int row = 0; row < height; row++) {
+                if (column == 0 || column == width - 1 || row == 0 || row == height - 1) {
+                    grid[row][column] = SquareType.OUTSIDE;
+                } else {
+                    grid[row][column] = SquareType.EMPTY;
+                }
+            }
+        }
     }
 
     // randomizes the board inside of the frame
     public void randomizeBoard() {
-	Random rnd = new Random();
-	int numberOfTypes = SquareType.values().length;
+        Random rnd = new Random();
+        int numberOfTypes = SquareType.values().length;
 
-	for (int column = 1; column < this.width-1; column++) {
-	    for (int row = 1; row < this.height-1; row++) {
-		int randomType = rnd.nextInt(numberOfTypes);
-		grid[row][column] = SquareType.values()[randomType];
-	    }
-	}
+        for (int column = 1; column < this.width - 1; column++) {
+            for (int row = 1; row < this.height - 1; row++) {
+                int randomType = rnd.nextInt(numberOfTypes);
+                grid[row][column] = SquareType.values()[randomType];
+            }
+        }
 
-	notifyListeners();
+        notifyListeners();
     }
 
     public void addBoardListener(BoardListener bl) {
-	this.boardListeners.add(bl);
+        this.boardListeners.add(bl);
     }
 
     public void removeBoardListener(BoardListener bl) {
-	this.boardListeners.remove(bl);
+        this.boardListeners.remove(bl);
     }
 
     public void notifyListeners() {
-	for (BoardListener bl : boardListeners) {
-	    bl.boardChanged();
-	}
+        for (BoardListener bl : boardListeners) {
+            bl.boardChanged();
+        }
     }
 
     public TetrisGame getGame() {
-	return game;
+        return game;
     }
 
     public int getWidth() {
-	return width;
+        return width;
     }
 
     public int getHeight() {
-	return height;
+        return height;
     }
 
     public Poly getFallingTetro() {
-	return fallingTetro;
+        return fallingTetro;
     }
 
     public int getFallingTetroX() {
-	return fallingTetroX;
+        return fallingTetroX;
     }
 
     public int getFallingTetroY() {
-	return fallingTetroY;
+        return fallingTetroY;
     }
 
     public SquareType[][] getGrid() {
-	return grid;
+        return grid;
     }
 
     public void setFallingTetroX(int x) {
-	    this.fallingTetroX = x;
+        this.fallingTetroX = x;
     }
+
     public void setFallingTetroY(int y) {
-	    this.fallingTetroY = y;
+        this.fallingTetroY = y;
     }
 
     public void setFallingTetro(Poly p) {
-	this.fallingTetro = p;
+        this.fallingTetro = p;
     }
 
     public void setSquare(int row, int column, SquareType value) {
-	this.grid[row][column] = value;
+        this.grid[row][column] = value;
     }
 
     public SquareType getCellType(int row, int column) {
-	return this.grid[row][column];
+        return this.grid[row][column];
     }
 
 

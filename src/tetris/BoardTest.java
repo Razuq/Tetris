@@ -6,31 +6,26 @@ import java.awt.event.ActionEvent;
 /**
  * Class is used to run various tests as the development goes along
  */
-public class BoardTest
-{
+public class BoardTest {
     private static final int BOARD_WIDTH = 16;
     private static final int BOARD_HEIGHT = 20;
 
     public static void main(String[] args) {
-	Board board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
+        Board board = new Board(BOARD_WIDTH, BOARD_HEIGHT);
 
 
-	TetrisFrame tFrame = new TetrisFrame(board); // not wrong as of now
+        TetrisFrame tFrame = new TetrisFrame(board);
 
-	final Action progressGame = new AbstractAction()
-	{
-	    public void actionPerformed(ActionEvent e) {
-		board.getGame().tick();
-		if(board.getGame().getState() == TetrisGame.States.GAME_OVER) {
-		    tFrame.createNewGame();
-		}
-	    }
+        final Action progressGame = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+               tFrame.getBoard().getGame().tick();
 
-	};
+            }};
 
-	final Timer clockTimer = new Timer(300, progressGame);
-	clockTimer.setCoalesce(true);
-	clockTimer.start();
+            final Timer clockTimer = new Timer(300, progressGame);
+            clockTimer.setCoalesce(true);
+            clockTimer.start();
+
+
     }
-
 }
