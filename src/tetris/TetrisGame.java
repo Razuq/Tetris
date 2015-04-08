@@ -165,10 +165,9 @@ public class TetrisGame {
             this.score += 300;
         } else if (rowsRemoved == 3) {
             this.score += 500;
-        } else if (rowsRemoved >= 4) {
+        } else if (rowsRemoved == 4) {
             this.score += 800;
         }
-        System.out.println("Score: " + this.score);
         board.notifyListeners();
     }
 

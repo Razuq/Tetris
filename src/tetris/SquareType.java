@@ -5,6 +5,10 @@ import java.awt.Color;
 public enum SquareType {
     OUTSIDE, EMPTY, I, O, T, S, Z, J, L;
 
+    /**
+     * The order of the colors in Color[] corresponds to the enum order
+     * @return EnumMap<SquareType, Color>
+     */
     public static EnumMap<SquareType, Color> colorMap() {
         EnumMap<SquareType, Color> squareTypeColors = new EnumMap<>(SquareType.class);
         Color[] colors = new Color[]{Color.DARK_GRAY, Color.BLACK, Color.CYAN, Color.YELLOW, Color.MAGENTA, // the order corresponds to the types

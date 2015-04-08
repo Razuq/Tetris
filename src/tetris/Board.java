@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  * This class is used to create the tetris game board
- * and also to handle the currently fa tetromino   aa
+ * and also to handle the currently falling tetromino
  */
 public class Board {
     private SquareType[][] grid;
@@ -17,12 +17,10 @@ public class Board {
     private int height;
 
     private Poly fallingTetro; // Should not be in the constructor, the poly is added as the game progresses
-    private int fallingTetroX;
-    private int fallingTetroY;
+    private int fallingTetroX; // The coordinate of the left-top corner of the tetro
+    private int fallingTetroY; //
 
     private TetrisGame game;
-
-
     private List<BoardListener> boardListeners = new ArrayList<>();
 
     public Board(int width, int height) {
@@ -43,7 +41,8 @@ public class Board {
         }
     }
 
-    // randomizes the board inside of the frame
+
+    // randomizes the board inside of the SquareType.OUTSIDE frame
     public void randomizeBoard() {
         Random rnd = new Random();
         int numberOfTypes = SquareType.values().length;
@@ -112,10 +111,12 @@ public class Board {
         this.fallingTetro = p;
     }
 
+    // Sets a specific square to the desired SquareType
     public void setSquare(int row, int column, SquareType value) {
         this.grid[row][column] = value;
     }
 
+    // Returns the SquareType for the specified square
     public SquareType getCellType(int row, int column) {
         return this.grid[row][column];
     }

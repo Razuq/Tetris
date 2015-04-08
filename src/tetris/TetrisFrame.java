@@ -17,7 +17,6 @@ public class TetrisFrame extends JFrame {
     private Board board;
     private JTextArea textBoard;
     public TetrisComponent tetrisComponent;
-    private KeyBindings kb;
 
     private final static int EXTRA_WIDTH = 15;
     private final static int EXTRA_HEIGHT = 60;
@@ -26,7 +25,6 @@ public class TetrisFrame extends JFrame {
         super("Tetris");
         this.board = board;
 
-
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setLayout(new MigLayout("fill, gap 0, insets 0"));
         this.getContentPane().setBackground(Color.decode("#333333"));
@@ -34,11 +32,9 @@ public class TetrisFrame extends JFrame {
         board.addBoardListener(tetrisComponent);
         this.setPreferredSize(new Dimension(tetrisComponent.getPreferredSize().width + EXTRA_WIDTH, tetrisComponent.getPreferredSize().height + EXTRA_HEIGHT));
 
-        //KeyBindings keys = new KeyBindings(this, tetrisComponent);
         keyBindings(tetrisComponent);
         this.add(tetrisComponent, "w  " + tetrisComponent.getPreferredSize().getWidth() + "!, h " + tetrisComponent.getPreferredSize().getHeight() + "!, al center top");
 
-        //createTextBoard();
         createMenu();
 
         this.pack();
@@ -119,7 +115,6 @@ public class TetrisFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (board.getGame().getState() == TetrisGame.States.RUN) {
-                    System.out.println("HARDDROP");
                     board.getGame().hardDrop();
                 }
             }
@@ -132,7 +127,6 @@ public class TetrisFrame extends JFrame {
             public void actionPerformed(final ActionEvent e) {
                 if (board.getGame().getState() == TetrisGame.States.GAME_OVER) {
                     newGame();
-                    System.out.println("New Game!");
                 }
             }
         };

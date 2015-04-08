@@ -3,7 +3,7 @@ package tetris;
 import java.util.ArrayList;
 
 /**
- *
+ * TODO comment
  */
 
 public class Poly {
@@ -52,18 +52,6 @@ public class Poly {
 
     public int getColumns() { // TODO nesseccary?
         return columns;
-    }
-
-    public int getLowestPoint() {
-        int lowestY = 0;
-        for (int y = 0; y < this.rows; y++) {
-            for (int x = 0; x < this.columns; x++) {
-                if ((squares[y][x] != SquareType.EMPTY) && y > lowestY) {
-                    lowestY = y;
-                }
-            }
-        }
-        return lowestY;
     }
 
     public SquareType getSquareType(int row, int column) {

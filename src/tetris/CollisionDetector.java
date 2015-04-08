@@ -1,7 +1,7 @@
 package tetris;
 
 /**
- * This class checks for collisions
+ * This class checks for collisions when moving in different directions
  */
 public class CollisionDetector {
     public static enum Side {LEFT, RIGHT, DOWN, NONE}
@@ -14,12 +14,20 @@ public class CollisionDetector {
                 return checkForCollision(board, 1, 0);
             case DOWN:
                 return checkForCollision(board, 0, 1);
-            case NONE:
+            case NONE: // "looks" right under the tetro, used when checking if a new tetro can be placed at all
                 return checkForCollision(board, 0, 0);
         }
         return false;
     }
 
+    /**
+     * Iterates through the tetro array and for each SquareType found (that is not EMPTY),
+     * it will check if its potential position is free.
+     * @param board
+     * @param addX
+     * @param addY addX and addY is used to get the potential position that would be caused by the movement
+     * @return true if it will collide or end up outside the board, else false
+     */
     private static boolean checkForCollision(Board board, int addX, int addY) {
         for (int x = 0; x < board.getFallingTetro().getColumns(); x++) {
             for (int y = 0; y < board.getFallingTetro().getRows(); y++) {
