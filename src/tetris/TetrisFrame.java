@@ -11,7 +11,8 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 /**
- * Creates the window for the game to run in
+ * TetrisFrame creates the window for the game to run in.
+ * It also binds the keys that ae used.
  */
 public class TetrisFrame extends JFrame {
     private Board board;
@@ -30,7 +31,8 @@ public class TetrisFrame extends JFrame {
         this.getContentPane().setBackground(Color.decode("#333333"));
         tetrisComponent = new TetrisComponent(board);
         board.addBoardListener(tetrisComponent);
-        this.setPreferredSize(new Dimension(tetrisComponent.getPreferredSize().width + EXTRA_WIDTH, tetrisComponent.getPreferredSize().height + EXTRA_HEIGHT));
+        this.setPreferredSize(new Dimension(tetrisComponent.getPreferredSize().width + EXTRA_WIDTH,
+                                            tetrisComponent.getPreferredSize().height + EXTRA_HEIGHT));
 
         keyBindings(tetrisComponent);
         this.add(tetrisComponent, "w  " + tetrisComponent.getPreferredSize().getWidth() + "!, h " + tetrisComponent.getPreferredSize().getHeight() + "!, al center top");
@@ -43,6 +45,7 @@ public class TetrisFrame extends JFrame {
 
 
     /**
+     * Creates a text based representation of the game.
      * Not used anymore, but it was in the assignment so I left it
      */
     private void createTextBoard() {
@@ -51,12 +54,15 @@ public class TetrisFrame extends JFrame {
         this.add(textBoard, "al center top");
     }
 
-    public void createNewGame() {
+    /*public void createNewGame() {
         this.board = new Board(board.getWidth(), board.getHeight());
         tetrisComponent = new TetrisComponent(board);
         board.getGame().setState(TetrisGame.States.RUN);
-    }
+    }*/
 
+    /**
+     * Creates the top menu bar with the option to exit the program.
+     */
     private void createMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -105,9 +111,10 @@ public class TetrisFrame extends JFrame {
 
 
     /**
-     * Binds keys for the current tetrisComponent
+     * Binds keys for the current tetrisComponent.
+     * The keys that are used are: SPACE, ENTER, LEFT, RIGHT, UP
      *
-     * @param tetrisComponent
+     * @param tetrisComponent the component to which to bind the keys
      */
     private void keyBindings(TetrisComponent tetrisComponent) {
 
@@ -159,8 +166,8 @@ public class TetrisFrame extends JFrame {
                 board.getGame().rotatePoly();
             }
         };
-        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("UP"), "rotate");
-        tetrisComponent.getActionMap().put("rotate", rotate);
+        tetrisComponent.getInputMap().put(KeyStroke.getKeyStroke("UP"), "rotateRight");
+        tetrisComponent.getActionMap().put("rotateRight", rotate);
     }
 }
 

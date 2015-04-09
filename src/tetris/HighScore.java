@@ -3,12 +3,17 @@ package tetris;
 import java.io.Serializable;
 
 /**
- * The HighScore class is used to create a new high score when the player looses.
+ * HighScore is a class used for adding new high scores.
  */
 public class HighScore {
     private String name;
     private int score;
 
+    /**
+     * Creates the HighScore object
+     * @param name  the name of the player
+     * @param score the final score the player managed to get
+     */
     public HighScore(String name, int score) {
         this.name = name;
         this.score = score;

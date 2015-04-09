@@ -7,7 +7,7 @@ import tetris.CollisionDetector.Side;
 import javax.swing.*;
 
 /**
- * This class contains the game mechanics for the game such as moveing the the blocks and collision checks
+ * This class contains the game mechanics for the game such as moving the blocks and collision checks
  */
 
 public class TetrisGame {
@@ -24,14 +24,18 @@ public class TetrisGame {
         this.board = b;
     }
 
+    /**
+     * The tick method is used to make the game progress forward.
+     * It is supposed to be called from a game loop.
+     * It will check if the board has a falling poly, if it has one
+     * it will try to move it one step down or write it to the board.
+     * If there is none it will try to add a new one.
+     */
     public void tick() {
-
         switch (state) {
-
             case RUN:
                 boolean hasFalling = (this.board.getFallingTetro() != null);
                 if (hasFalling) {
-                    //int stepsToMove = board.getHeight() - (board.getFallingTetro().getLowestPoint() + board.getFallingTetroY()) - 2;
                     if (!CollisionDetector.detectCollision(Side.DOWN, board)) {
                         movePolyDown();
                     } else {
@@ -50,6 +54,10 @@ public class TetrisGame {
     }
 
 
+    /**
+     * Creates a new random Poly and adds it as "falling" to the board.
+     * Should there not be enough space left, it changes the game state to GAME_OVER.
+     */
     private void addRandomPoly() {
         Random randomPoly = new Random();
         TetrominoMaker tm = new TetrominoMaker();
@@ -107,8 +115,8 @@ public class TetrisGame {
         board.setFallingTetroY(board.getFallingTetroY() + 1);
     }
 
-    /*
-    * Moves the tetro as far down as possible
+    /**
+    * Moves the falling tetro as far down as possible
      */
     public void hardDrop() {
         while (!CollisionDetector.detectCollision(Side.DOWN, board)) {
@@ -117,30 +125,33 @@ public class TetrisGame {
         board.notifyListeners();
     }
 
+    /**
+     * Rotates the falling poly if there is enough room.
+     */
     public void rotatePoly() {
         Poly oldPoly = board.getFallingTetro();
-        board.setFallingTetro(board.getFallingTetro().rotate(true));
+        board.setFallingTetro(board.getFallingTetro().rotateRight());
         if (CollisionDetector.detectCollision(Side.NONE, board)) {
             board.setFallingTetro(oldPoly);
         }
         board.notifyListeners();
     }
 
-    /*
-    * Iterates through the board looking for full rows.
-    * When one is found, that row is removed and the addScore method is called.
+    /**
+    * Iterates through the board row by row, looking for rows that does not contain any SquareType.EMPTY.
+    * When one is found, the values on that row is set to EMPTY and the rows above it are moved down one step.
      */
     private void removeRow() {
         int rowsRemoved = 0;
         for (int y = 1; y < board.getHeight() - 1; y++) {
-            int counter = 1;
+            int fullRowCounter = 1;
             for (int x = 1; x < board.getWidth() - 1; x++) {
                 if (board.getCellType(y, x) != SquareType.EMPTY) {
-                    counter++;
+                    fullRowCounter++; // increments with one for each square found that is not empty
                 }
             }
-            if (counter == board.getWidth() - 1) {
-                for (int column = 1; column < counter; column++) {
+            if (fullRowCounter == board.getWidth() - 1) {
+                for (int column = 1; column < fullRowCounter; column++) {
                     board.setSquare(y, column, SquareType.EMPTY);
                 }
                 rowsRemoved++;
@@ -158,6 +169,12 @@ public class TetrisGame {
     }
 
 
+    /**
+     * Increments the score variable with a value based on how many rows
+     * that was removed.
+     *
+     * @param rowsRemoved   number of rows removed with the removeRow method.
+     */
     private void addScore(int rowsRemoved) {
         if (rowsRemoved == 1) {
             this.score += 100;
@@ -171,6 +188,11 @@ public class TetrisGame {
         board.notifyListeners();
     }
 
+    /**
+     * Creates a JOptionPane where the player can enter his/hers name.
+     * The name combined with the score is then used to create a HighScore object
+     * that is added to the HighScoreList.
+     */
     private void setHighScore() {
         String name = JOptionPane.showInputDialog("Enter your name");
         HighScoreList hsl = HighScoreList.getIntance();

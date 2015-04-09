@@ -3,7 +3,9 @@ package tetris;
 import java.util.ArrayList;
 
 /**
- * TODO comment
+ * The Poly class is used when creating new tetrominos.
+ * It is only called from TetrominoMaker which is the class
+ * that creates the SquareType[][] array.
  */
 
 public class Poly {
@@ -19,6 +21,10 @@ public class Poly {
         createCoordinates();
     }
 
+    /**
+     * createCoordinates iterates through the squares array (SquareType[][])
+     * and appends each coordinate set to the polyCoordinates array.
+     */
     private void createCoordinates() {
         this.polyCoordinates = new ArrayList<>();
         for (int y = 0; y < rows; y++) {
@@ -28,37 +34,38 @@ public class Poly {
         }
     }
 
-    public Poly rotate(boolean direction) { // true= right, false=left
-        int numberOfRotations = 0;
-        if (direction) {
-            numberOfRotations = 1;
-        } else {
-            numberOfRotations = 3;
-        }
-
+    /**
+     * Rotates the Poly to the right.
+     * @return a new Poly object with the original but rotated Poly.
+     */
+    public Poly rotateRight() {
         Poly newPoly = new Poly(new SquareType[rows][columns]);
 
-            for (int r = 0; r < rows; r++) {
-                for (int c = 0; c < columns; c++) {
-                    newPoly.squares[c][rows-1-r] = this.squares[r][c];
+            for (int row = 0; row < rows; row++) {
+                for (int column = 0; column < columns; column++) {
+                    newPoly.squares[column][rows-1-row] = this.squares[row][column];
                 }
             }
-
         return newPoly;
     }
-    public int getRows() { // might be used later on TODO
+
+
+    public int getRows() {
         return rows;
     }
 
-    public int getColumns() { // TODO nesseccary?
+
+    public int getColumns() {
         return columns;
     }
+
 
     public SquareType getSquareType(int row, int column) {
         return squares[row][column];
     }
 
-    public ArrayList<int[]> getPolyCoordinates() { // maybe
+
+    public ArrayList<int[]> getPolyCoordinates() {
         return polyCoordinates;
     }
 }

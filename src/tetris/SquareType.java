@@ -6,8 +6,9 @@ public enum SquareType {
     OUTSIDE, EMPTY, I, O, T, S, Z, J, L;
 
     /**
-     * The order of the colors in Color[] corresponds to the enum order
-     * @return EnumMap<SquareType, Color>
+     * Creates a EnumMap with the different SquareTypes as keys and colors as values.
+     * The order of the colors in Color[] corresponds to the enum order.
+     * @return EnumMap<SquareType, Color> where each SquareType corresonds to a certain color
      */
     public static EnumMap<SquareType, Color> colorMap() {
         EnumMap<SquareType, Color> squareTypeColors = new EnumMap<>(SquareType.class);

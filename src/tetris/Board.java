@@ -1,15 +1,12 @@
 package tetris;
 
-
-import java.awt.Rectangle;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * This class is used to create the tetris game board
- * and also to handle the currently falling tetromino
+ * The board class is used for creating the two-dimensional game board that the game is played upon.
+ * Board is also used when adding a falling tetromino.
  */
 public class Board {
     private SquareType[][] grid;
@@ -23,6 +20,13 @@ public class Board {
     private TetrisGame game;
     private List<BoardListener> boardListeners = new ArrayList<>();
 
+    /**
+     * Creates a board with the specified width and height.
+     * The outermost squares on the board are set to the enum SquareType.OUTSIDE,
+     * whilst the rest are set to SquareType.EMPTY
+     * @param width the width of the board
+     * @param height he height of the board
+     */
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
@@ -42,7 +46,10 @@ public class Board {
     }
 
 
-    // randomizes the board inside of the SquareType.OUTSIDE frame
+    /**
+     * Randomizes the board on the inside of its frame.
+     * Even though it is not used, I left it because it was in the assignment.
+     */
     public void randomizeBoard() {
         Random rnd = new Random();
         int numberOfTypes = SquareType.values().length;
@@ -95,9 +102,6 @@ public class Board {
         return fallingTetroY;
     }
 
-    public SquareType[][] getGrid() {
-        return grid;
-    }
 
     public void setFallingTetroX(int x) {
         this.fallingTetroX = x;
@@ -111,7 +115,7 @@ public class Board {
         this.fallingTetro = p;
     }
 
-    // Sets a specific square to the desired SquareType
+    // Sets a specific SquareType to the desired square
     public void setSquare(int row, int column, SquareType value) {
         this.grid[row][column] = value;
     }

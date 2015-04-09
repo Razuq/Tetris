@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * This class is used to start the game
- * it also contains the time-loop that drives the game forward
+ * BoardTest is the class used for running the game.
+ * It creates a new tetris frame and then starts a game loop,
+ * which in turn calls on the tick method in the TetrisGame class.
  */
-public class BoardTest {
+final public class BoardTest {
     private static final int BOARD_WIDTH = 16;
     private static final int BOARD_HEIGHT = 20;
     private static final int TIMER_INTERVAL = 300; // In milliseconds
 
+    private BoardTest() {}
 
     public static void main(String[] args) {
         TetrisFrame tFrame = new TetrisFrame(new Board(BOARD_WIDTH, BOARD_HEIGHT));

@@ -1,8 +1,11 @@
 package tetris;
 
 /**
- * This class checks for collisions when moving in different directions
+ * This class checks for collisions when moving in different directions.
+ * The enum Side is used for specifing in which direction to check for a collision.
+ * (NONE is used for checking on the current position)
  */
+
 public class CollisionDetector {
     public static enum Side {LEFT, RIGHT, DOWN, NONE}
 
@@ -23,10 +26,11 @@ public class CollisionDetector {
     /**
      * Iterates through the tetro array and for each SquareType found (that is not EMPTY),
      * it will check if its potential position is free.
-     * @param board
-     * @param addX
-     * @param addY addX and addY is used to get the potential position that would be caused by the movement
-     * @return true if it will collide or end up outside the board, else false
+     *
+     * @param board the board on which to check for collisions.
+     * @param addX  see below.
+     * @param addY  addX and addY is used to get the potential position that would be caused by the movement.
+     * @return      boolean, true if it will collide or end up outside the board, else false
      */
     private static boolean checkForCollision(Board board, int addX, int addY) {
         for (int x = 0; x < board.getFallingTetro().getColumns(); x++) {

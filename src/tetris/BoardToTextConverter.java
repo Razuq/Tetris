@@ -1,7 +1,9 @@
 package tetris;
 
 /**
- * This class was used as an early step, to be able to visualize the game as development progressed
+ * This class was used as an early step,
+ * to be able to visualize the game as development progressed.
+ * It is no longer used.
  */
 public class BoardToTextConverter {
     public static String convertToText(Board board) {

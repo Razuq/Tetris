@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * HighScoreList is used to keep a record of all high scores recorded during the current program instance
+ * HighScoreList is a class used to keep a record of all high scores
+ * recorded during the current program instance
  */
 public class HighScoreList {
     private static final HighScoreList INSTANCE = new HighScoreList();
@@ -25,7 +26,7 @@ public class HighScoreList {
 
     /**
      * Adds a new high score to the HighScoreList and sorts it (highest to lowest).
-     * @param highScore
+     * @param highScore the HighScore object to be added to the list
      */
     public void addHighScore(HighScore highScore) {
         this.highScores.add(highScore);
@@ -36,11 +37,17 @@ public class HighScoreList {
         return highScores;
     }
 
-    // Adds some high scores to fill up the list
+
+    /**
+     * Generates a number of high scores (highScoresToAdd)
+     * and adds them to the high score list. This method was
+     * used for testing purposes but I decided to keep it.
+     */
     private void addRandomHighScores() {
         int highScoresToAdd = 10;
+        int scoreMultipier = 1000;
         for (int i = 1; i <= highScoresToAdd; i++) {
-            this.highScores.add(new HighScore("Player " + i, 1000*i));
+            this.highScores.add(new HighScore("Player " + i, scoreMultipier*i));
         }
     }
 }
